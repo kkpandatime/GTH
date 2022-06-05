@@ -1,1 +1,97 @@
+"""
+1. Реализовать вывод информации о промежутке времени в зависимости от его продолжительности duration в секундах:
+до минуты: <s> сек;
+до часа: <m> мин <s> сек;
+до суток: <h> час <m> мин <s> сек;
+* в остальных случаях: <d> дн <h> час <m> мин <s> сек.
+"""
+
+duration = int(input('Insert length time in seconds: '))
+
+SECOND = 1
+MINUTE = 60 * SECOND
+HOUR = 60 * MINUTE
+DAY = 24 * HOUR
+add_lenght_time = False
+
+total_days = duration // DAY
+duration = duration % DAY
+
+total_hours = duration // HOUR
+duration = duration % HOUR
+
+total_minutes = duration // MINUTE
+
+total_seconds = duration % MINUTE
+
+total_time = ''
+if total_days:
+    total_time += str(total_days) +' дн '
+    add_lenght_time = True
+if total_hours or add_lenght_time:
+    add_lenght_time = True
+    total_time += str(total_hours) + ' ч '
+if total_minutes or add_lenght_time:
+    add_lenght_time = True
+    total_time += str(total_minutes) + ' мин '
+if total_seconds or add_lenght_time:
+    total_time += str(total_seconds) + ' сек '
+print(total_time)
+
+"""
+2. Создать список, состоящий из кубов нечётных чисел от 1 до 1000 (куб X - третья степень
+числа X):
+a. Вычислить сумму тех чисел из этого списка, сумма цифр которых делится нацело на 7.
+Например, число «19 ^ 3 = 6859» будем включать в сумму, так как 6 + 8 + 5 + 9 = 28 –
+делится нацело на 7. Внимание: использовать только арифметические операции!
+b. К каждому элементу списка добавить 17 и заново вычислить сумму тех чисел из этого
+списка, сумма цифр которых делится нацело на 7.
+c. * Решить задачу под пунктом b, не создавая новый список
+"""
+
+list_of_cubes = []
+for i in range(1, 1000, 2):
+    list_of_cubes.append(i ** 3)
+print(list_of_cubes)
+
+total_sum = 0
+for i in list_of_cubes:
+    init_number = i
+    sum_of_digits = 0
+    while i > 0:
+        sum_of_digits += i % 10
+        i //= 10
+    if sum_of_digits % 7 == 0:
+            total_sum += init_number
+print(total_sum)
+
+grand_total_sum = 0
+for i in list_of_cubes:
+    i += 17
+    init_number = i
+    sum_of_digits = 0
+    while i > 0:
+        sum_of_digits += (i % 10)
+        i //= 10
+    if sum_of_digits % 7 == 0:
+        grand_total_sum += init_number
+print(grand_total_sum)
+
+
+"""
+3. Реализовать склонение слова «процент» во фразе «N процентов».
+Вывести эту фразу на экран отдельной строкой для каждого из чисел в интервале от 1 до 100.
+"""
+
+exceptions = [11, 12, 13, 14]
+for i in range(1, 101):
+    number = i
+    if i in exceptions:
+        print(number, ' процентов')
+    elif i % 10 == 1:
+        print(number, ' процент ')
+    elif i % 10 > 1 and i % 10 < 5:
+        print(number, ' процента')
+    else:
+        print(number, ' процентов ')
 
